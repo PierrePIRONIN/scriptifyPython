@@ -1,7 +1,7 @@
 from Nombre import Nombre
 from Chiffre import Chiffre
 
-class LibCalcul:
+class LibCalcul:    
     @staticmethod
     def getNombre(nombre):
 #         print "getNombre avec", nombre
