@@ -4,6 +4,9 @@ class ScriptifyInterceptor(MethodInterceptor):
     _sessionIds = {}
     _sessionIdGenerated = {}
     
+    def __init__(self, outputFilename):
+        self._outputFilename = outputFilename
+    
     def getClassNameForObject(self, objectTarget):
         return objectTarget.__class__.__name__
     
@@ -30,8 +33,10 @@ class ScriptifyInterceptor(MethodInterceptor):
                 lstArgs.append(self.getVariableForObject(arg))
             else:
                 lstArgs.append(str(arg))
-        result = " = " + self.getClassNameForObject(invocation.instance) + "." + invocation.method_name + "(" + str(", ").join(lstArgs) + ")"
+        result = self.getClassNameForObject(invocation.instance) + "." + invocation.method_name + "(" + str(", ").join(lstArgs) + ")"
         objectReturned = invocation.proceed()
-        result = self.getVariableForObject(objectReturned) + result
-        print result
+        if objectReturned:
+            result = self.getVariableForObject(objectReturned) + " = " +  result
+        with open(self._outputFilename, 'a') as script:
+            script.write(result+"\n")
         return objectReturned

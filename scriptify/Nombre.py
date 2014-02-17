@@ -4,3 +4,6 @@ class Nombre:
         
     def toInt(self):
         return self.nombre
+    
+    def printOut(self):
+        print self.toInt()
