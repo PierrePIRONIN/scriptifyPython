@@ -2,7 +2,7 @@ from springpython.aop import ProxyFactory
 from ScriptifyInterceptor import ScriptifyInterceptor
 from LibCalcul import LibCalcul
 
-scriptFilename = "D:/testScriptify.py"
+scriptFilename = "testScriptify.py"
 with open(scriptFilename, 'w') as script:
     script.write("from LibCalcul import LibCalcul\n\n")
 
